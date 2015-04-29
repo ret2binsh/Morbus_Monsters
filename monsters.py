@@ -13,6 +13,35 @@ class Monsters(object):
         self.acc = 80
         self.defense = .1
 
+    def __str__(self):
+        return ("Name: %s \nLevel: %s \nType: %s \nWeakness: %s\
+                    \nHealth: %s \nExp: %s") % (self.name,
+                                               self.level,
+                                               self.p_type,
+                                               self.weak,
+                                               self.health,
+                                               self.exp)
+
+    def attack_result(self,attack):
+        self.health = self.health - attack
+        if self.health > self.max_health:
+            self.health = self.max_health
+            return self.health
+        elif self.health < 0:
+            print('%s has been eradicated.' % self.name)
+            self.health = 0
+            return self.health
+        else:
+            return self.health
+
+    def display_move(self,attack):
+        if attack == 1:
+            return self.move1
+        elif attack == 2:
+            return self.move2
+        else:
+            return self.move3
+
 class Fire_Type(object):
     def __init__(self):
         super().__init__()

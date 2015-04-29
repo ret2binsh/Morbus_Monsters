@@ -1,3 +1,4 @@
+import copy
 import os
 import sys
 from random import choice
@@ -112,8 +113,7 @@ def input_request():
 
 
 '''Prompts the user to select from a list of available monsters.
-Once one is selected a class is created that replicates the
-selected monster from the monsters.py file.
+Once one is selected a class is copied from the monsters.py file.
 '''
 def select_monster():
     
@@ -131,58 +131,14 @@ def select_monster():
         user_input = input('Type the full name: ').lower()
 
     #Restores proper formatting
-    user_input = user_input.title()
+    user_input = user_input.title()   
 
-    '''Copies the class information provided by the monsters.py from
-    the selected monster.
-    '''
-    class Player_Char(object):
-        def __init__(self):
-            self.max_health = available_monsters[user_input].max_health
-            self.health = available_monsters[user_input].health
-            self.acc = available_monsters[user_input].acc
-            self.p_type = available_monsters[user_input].p_type
-            self.weak = available_monsters[user_input].weak
-            self.name = available_monsters[user_input].name
-            self.move1 = available_monsters[user_input].move1
-            self.move2 = available_monsters[user_input].move2
-            self.move3 = available_monsters[user_input].move3
-            self.level = available_monsters[user_input].level
-            self.exp = available_monsters[user_input].exp
-            self.power = available_monsters[user_input].power
-            self.defense = available_monsters[user_input].defense
+    return copy.deepcopy(available_monsters[user_input])
 
-        def __str__(self):
-            return ("Name: %s \nLevel: %s \nType: %s \nWeakness: %s\
-                    \nHealth: %s \nExp: %s") % (self.name,
-                                               self.level,
-                                               self.p_type,
-                                               self.weak,
-                                               self.health,
-                                               self.exp)
-
-        def attack_result(self,attack):
-            self.health = self.health - attack
-            if self.health > 100:
-                self.health = 100
-                return self.health
-            elif self.health < 0:
-                print('%s has been eradicated.' % self.name)
-                self.health = 0
-                return self.health
-            else:
-                return self.health
-
-        def display_move(self,attack):
-            if attack == 1:
-                return self.move1
-            elif attack == 2:
-                return self.move2
-            else:
-                return self.move3
-
-    return Player_Char()
-
+'''Randomly selects a monster from the available_monsters dictionary
+in the monsters.py file. Then copies this class for use during the
+game.
+'''
 def cpu_monster():
     
     monsters = []
@@ -195,53 +151,7 @@ def cpu_monster():
 
     monster = choice(monsters)
 
-    class CPU_Char(object):
-        def __init__(self):
-            self.max_health = available_monsters[monster].max_health
-            self.health = available_monsters[monster].health
-            self.acc = available_monsters[monster].acc
-            self.p_type = available_monsters[monster].p_type
-            self.weak = available_monsters[monster].weak
-            self.name = available_monsters[monster].name
-            self.move1 = available_monsters[monster].move1
-            self.move2 = available_monsters[monster].move2
-            self.move3 = available_monsters[monster].move3
-            self.level = available_monsters[monster].level
-            self.exp = available_monsters[monster].exp
-            self.power = available_monsters[monster].power
-            self.defense = available_monsters[monster].defense
-
-        def __str__(self):
-            return ("Name: %s \nLevel: %s \nType: %s \nWeakness: %s\
-                    \nHealth: %s \nExp: %s") % (self.name,
-                                               self.level,
-                                               self.p_type,
-                                               self.weak,
-                                               self.health,
-                                               self.exp)
-
-        def attack_result(self,attack):
-            self.health = self.health - attack
-            if self.health > 100:
-                self.health = 100
-                return self.health
-            elif self.health < 0:
-                print('%s has been eradicated.' % self.name)
-                self.health = 0
-                return self.health
-            else:
-                return self.health
-
-        def display_move(self,attack):
-            if attack == 1:
-                return self.move1
-            elif attack == 2:
-                return self.move2
-            else:
-                return self.move3
-            
-
-    return CPU_Char()
+    return copy.deepcopy(available_monsters[monster])
             
 
 #Main function that handles the Game. 
