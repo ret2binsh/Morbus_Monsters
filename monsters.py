@@ -5,7 +5,6 @@ from random import randrange
 class Monsters(object):
     def __init__(self):
         super().__init__()
-        self.max_health = 100
         self.health = self.max_health
         self.level = 1
         self.exp = 0
@@ -69,7 +68,8 @@ class Electric_Type(object):
 class Ignis(Monsters,Fire_Type):
     def __init__(self):
         super().__init__()
-        self.health = 200
+        self.max_health = 200
+        self.health = self.max_health
         self.defense = .2
         self.name = 'Ignis-morbus'
         self.move1 = ('Harpoon','Normal')
@@ -79,6 +79,8 @@ class Ignis(Monsters,Fire_Type):
 class Aqua(Monsters, Water_Type):
     def __init__(self):
         super().__init__()
+        self.max_health = 100
+        self.health = self.max_health
         self.power = 1.3
         self.name = 'Aqua-morbus'
         self.move1 = ('Collide','Normal')
@@ -88,6 +90,8 @@ class Aqua(Monsters, Water_Type):
 class Fulgur(Monsters, Electric_Type):
     def __init__(self):
         super().__init__()
+        self.max_health = 100
+        self.health = self.max_health
         self.power = 1.2
         self.name = 'Fulgur-morbus'
         self.move1 = ('Slash','Normal')
@@ -97,7 +101,8 @@ class Fulgur(Monsters, Electric_Type):
 class Terra(Monsters,Ground_Type):
     def __init__(self):
         super().__init__()
-        self.health = 150
+        self.max_health = 150
+        self.health = self.max_health
         self.power = 1.2
         self.name = 'Terra-morbus'
         self.move1 = ('Smash','Normal')
